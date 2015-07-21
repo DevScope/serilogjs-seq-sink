@@ -1,8 +1,8 @@
 {
-  "name": "serilog-seq-sink",
+  "name": "serilogjs-seq-sink",
   "version": "1.0.0",
   "description": "A SerilogJS sink that POSTs events to Seq Server.",
-  "main": "serilog-seq-sink.js",
+  "main": "serilogjs-seq-sink.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,13 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/canoas/serilogjs-seq-sink.git"
   },
-  "author": "ashley@codecapers.com.au",
+  "author": "joseantonio.silva@devscope.net",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/canoas/serilogjs-seq-sink/issues"
   },
   "homepage": "https://github.com/canoas/serilogjs-seq-sink#readme",
   "dependencies": {
-
+    "serilog-dev":"*"
   }
 }
