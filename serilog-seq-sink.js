@@ -23,7 +23,7 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.serilog.sink.http = factory();
+        root.serilog.sink.seq = factory();
     }
 }(this, function() {
 
