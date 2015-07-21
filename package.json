@@ -1,6 +1,6 @@
 {
   "name": "serilogjs-seq-sink",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A SerilogJS sink that POSTs events to Seq Server.",
   "main": "serilogjs-seq-sink.js",
   "scripts": {
@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/canoas/serilogjs-seq-sink#readme",
   "dependencies": {
-    "serilog-dev":"*"
+    "serilog-dev":"latest"
   }
 }
