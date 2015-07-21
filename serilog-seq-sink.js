@@ -23,23 +23,19 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.serilog.sink.seq = factory();
+        root.serilog.sink.http = factory();
     }
 }(this, function() {
 
-    var SeqSink = function (options) {
+    var HttpSink = function (options) {
         var self = this;
 
-        self.toString = function() { return 'SeqSink'; };
+        self.toString = function() { return 'HttpSink'; };
 
         options = options || {};
 
         self.emit = function(evt) {
             var renderedMsg = evt.messageTemplate.render(evt.properties);
-
-            // Convert to properties format expected by log server.
-            var properties =
-                {};
 
             var body = {
                 events: [
@@ -48,32 +44,19 @@
                         Level: evt.level,
                         MessageTemplate: evt.messageTemplate.raw,
                         RenderedMessage: renderedMsg,
-                        Properties: properties,
+                        Properties: evt.properties
                     },
                 ],
             };
 
-            var requestOptions = {
-                url: options.url,
-                method: 'POST',
-                json: body,
-            };
-
-            // request(requestOptions, function (err, response, body) {
-            //     if (err) {
-            //         console.error('Error posting log message');
-            //         console.error(err);
-            //         return;
-            //     }
-            //
-            //     console.log('Posted log message');
-            //     console.log(response.statusCode);
-            // });
-
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("POST", options.url + "/api/events/raw", true);
+            xmlHttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xmlHttp.send(JSON.stringify(body));
         };
     }
 
-    return function(options) {
-        return new SeqSink(options); 
+    return function(options) { 
+        return new HttpSink(options); 
     };
 }));
