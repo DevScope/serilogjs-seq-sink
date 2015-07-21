@@ -1,23 +1,22 @@
 {
-  "name": "serilog-http-sink",
-  "version": "1.0.2",
-  "description": "A SerilogJS sink that outputs logs via HTTP POST.",
-  "main": "serilog-http-sink.js",
+  "name": "serilog-seq-sink",
+  "version": "1.0.0",
+  "description": "A SerilogJS sink that POSTs events to Seq Server.",
+  "main": "serilog-seq-sink.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codecapers/serilogjs-http-sink.git"
+    "url": "git+https://github.com/canoas/serilogjs-seq-sink.git"
   },
   "author": "ashley@codecapers.com.au",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codecapers/serilogjs-http-sink/issues"
+    "url": "https://github.com/canoas/serilogjs-seq-sink/issues"
   },
-  "homepage": "https://github.com/codecapers/serilogjs-http-sink#readme",
+  "homepage": "https://github.com/canoas/serilogjs-seq-sink#readme",
   "dependencies": {
-    "linq": "^3.0.4-beta",
-    "request": "^2.58.0"
+
   }
 }

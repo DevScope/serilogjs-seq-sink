@@ -23,17 +23,14 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.serilog.sink.http = factory();
+        root.serilog.sink.seq = factory();
     }
 }(this, function() {
 
-    var HttpSink = function (options) {
+    var SeqSink = function (options) {
         var self = this;
 
-        var request = require('request');
-        var E = require('linq');
-
-        self.toString = function() { return 'HttpSink'; };
+        self.toString = function() { return 'SeqSink'; };
 
         options = options || {};
 
@@ -41,27 +38,11 @@
             var renderedMsg = evt.messageTemplate.render(evt.properties);
 
             // Convert to properties format expected by log server.
-            var properties = 
-                E.from(Object.keys(evt.properties))
-                    .select(function (propertyName) {
-                        return { 
-                            propertyName: propertyName,
-                            propertyValue: evt.properties[propertyName],
-                        };
-                    })
-                    .toObject(
-                        function (property) {
-                            return property.propertyName;
-                        },
-                        function (property) {
-                            return {
-                                Value: property.propertyValue,
-                            };
-                        }
-                    );
+            var properties =
+                {};
 
             var body = {
-                Logs: [
+                events: [
                     {
                         Timestamp: evt.timestamp,
                         Level: evt.level,
@@ -78,21 +59,21 @@
                 json: body,
             };
 
-            request(requestOptions, function (err, response, body) {
-                if (err) {
-                    console.error('Error posting log message');
-                    console.error(err);
-                    return;
-                }
-
-                console.log('Posted log message');
-                console.log(response.statusCode);
-            });
+            // request(requestOptions, function (err, response, body) {
+            //     if (err) {
+            //         console.error('Error posting log message');
+            //         console.error(err);
+            //         return;
+            //     }
+            //
+            //     console.log('Posted log message');
+            //     console.log(response.statusCode);
+            // });
 
         };
     }
 
-    return function(options) { 
-        return new HttpSink(options); 
+    return function(options) {
+        return new SeqSink(options); 
     };
 }));
