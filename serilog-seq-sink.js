@@ -27,10 +27,10 @@
     }
 }(this, function() {
 
-    var HttpSink = function (options) {
+    var SeqSink = function (options) {
         var self = this;
 
-        self.toString = function() { return 'HttpSink'; };
+        self.toString = function() { return 'SeqSink'; };
 
         options = options || {};
 
@@ -56,7 +56,7 @@
         };
     }
 
-    return function(options) { 
-        return new HttpSink(options); 
+    return function(options) {
+        return new SeqSink(options); 
     };
 }));
