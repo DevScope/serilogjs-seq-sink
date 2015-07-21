@@ -1,6 +1,6 @@
 {
   "name": "serilogjs-seq-sink",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A SerilogJS sink that POSTs events to Seq Server.",
   "main": "serilogjs-seq-sink.js",
   "scripts": {

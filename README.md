@@ -18,6 +18,6 @@ PS: Change the url to point to you production Seq endpoint
 
 # Using
 ```
-log.error('Cool semantic log error for {App}', {App:"myCoolJsApp"});
+log.error('Cool semantic log error for {App}', {App:'myCoolJsApp'});
 ```
 Check for more examples [here](https://github.com/structured-log/structured-log/blob/dev/README.md)
