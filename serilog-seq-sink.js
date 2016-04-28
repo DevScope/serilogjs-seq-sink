@@ -25,29 +25,53 @@
     } else {
         root.serilog.sink.seq = factory();
     }
-}(this, function() {
+}(this, function () {
 
     var SeqSink = function (options) {
         var self = this;
 
-        self.toString = function() { return 'SeqSink'; };
+        self.toString = function () { return 'SeqSink'; };
 
         options = options || {};
 
-        self.emit = function(evt) {
-            var renderedMsg = evt.messageTemplate.render(evt.properties);
+        var levels = {
+            ERROR: "Error",
+            WARN: "Warning",
+            INFO: "Information",
+            DEBUG: "Debug",
+            VERBOSE: "Verbose"
+        };
+
+        self.emit = function (evt) {
 
             var body = {
-                events: [
-                    {
-                        Timestamp: evt.timestamp,
-                        Level: evt.level,
-                        MessageTemplate: evt.messageTemplate.raw,
-                        RenderedMessage: renderedMsg,
-                        Properties: evt.properties
-                    },
-                ],
+                events: []
             };
+
+            if (evt.constructor === Array) {
+                for (var i = 0; i < evt.length; i++) {
+                    var renderedMsg = evt[i].messageTemplate.render(evt[i].properties);
+
+                    body.events.push({
+                        Timestamp: evt[i].timestamp,
+                        Level: levels[evt[i].level],
+                        MessageTemplate: evt[i].messageTemplate.raw,
+                        RenderedMessage: renderedMsg,
+                        Properties: evt[i].properties
+                    });
+                }
+            }
+            else {
+                renderedMsg = evt.messageTemplate.render(evt.properties);
+
+                body.events.push({
+                    Timestamp: evt.timestamp,
+                    Level: levels[evt[i].level],
+                    MessageTemplate: evt.messageTemplate.raw,
+                    RenderedMessage: renderedMsg,
+                    Properties: evt.properties
+                });
+            }
 
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.open("POST", options.url + "/api/events/raw", true);
@@ -56,7 +80,7 @@
         };
     }
 
-    return function(options) {
-        return new SeqSink(options); 
+    return function (options) {
+        return new SeqSink(options);
     };
 }));
