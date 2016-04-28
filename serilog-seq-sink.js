@@ -23,11 +23,21 @@
     } else if (typeof exports === 'object') {
         module.exports = factory();
     } else {
-        root.serilog.sink.seq = factory();
+        root.structuredLog.sink.seq = factory();
     }
 }(this, function () {
 
     var SeqSink = function (options) {
+
+        // Argument checking.
+        if (!options) {
+            throw new Error("'options' parameter is required.");
+        }
+
+        if (!options.url) {
+            throw new Error("'options.url' parameter is required.");
+        }
+
         var self = this;
 
         self.toString = function () { return 'SeqSink'; };

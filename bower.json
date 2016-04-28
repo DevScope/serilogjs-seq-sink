@@ -1,0 +1,20 @@
+{
+  "name": "structured-log.seq.sink",
+  "version": "0.0.0",
+  "homepage": "https://github.com/DevScope/serilogjs-seq-sink",
+  "authors": [
+    "joseantonio.silva@devscope.net",
+    "ashley@codecapers.com.au"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "structured-log": "*"
+  }
+}
