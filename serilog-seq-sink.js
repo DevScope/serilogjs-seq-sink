@@ -34,13 +34,7 @@
 
         options = options || {};
 
-        // proper case string prptotype (JScript 5.5+)
-        String.prototype.toProperCase = function () {
-            return this.toLowerCase().replace(/^(.)|\s(.)/g,
-                function ($1) { return $1.toUpperCase(); });
-        }
-
-        var level = {
+        var levels = {
             ERROR: "Error",
             WARN: "Warning",
             INFO: "Information",
@@ -60,7 +54,7 @@
 
                     body.events.push({
                         Timestamp: evt[i].timestamp,
-                        Level: level[evt[i].level],
+                        Level: levels[evt[i].level],
                         MessageTemplate: evt[i].messageTemplate.raw,
                         RenderedMessage: renderedMsg,
                         Properties: evt[i].properties
@@ -72,7 +66,7 @@
 
                 body.events.push({
                     Timestamp: evt.timestamp,
-                    Level: level[evt[i].level],
+                    Level: levels[evt[i].level],
                     MessageTemplate: evt.messageTemplate.raw,
                     RenderedMessage: renderedMsg,
                     Properties: evt.properties
